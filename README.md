@@ -1,7 +1,11 @@
-# <video width=25 src="https://i.imgur.com/PiCxRvP.mp4"></video> 2D Canvas Smoke Animation
+# 2D Canvas Smoke Animation
 
 <p align=center>
-  <a href="https://bamdadsabbagh.github.io/2d-canvas-smoke-animation/"><video width=500 src="https://i.imgur.com/PiCxRvP.mp4"></video></a>
+  <a href="https://bamdadsabbagh.github.io/2d-canvas-smoke-animation/">
+    <video width=500>
+      <source src="https://i.imgur.com/PiCxRvP.mp4">
+    </video>
+  </a>
 </p>
 
 <p align=center>
