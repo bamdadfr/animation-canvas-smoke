@@ -1,9 +1,10 @@
 {
-  "name": "2d-canvas-smoke-animation",
+  "name": "animation-canvas-smoke",
+  "version": "1.0.1",
   "private": false,
-  "description": "2D Canvas Smoke Animation",
+  "description": "Smoke Animation with Canvas",
   "repository": {
-    "url": "https://github.com/bamdadsabbagh/2d-canvas-smoke-animation"
+    "url": "https://github.com/bamdadsabbagh/animation-canvas-smoke"
   },
   "license": "MIT",
   "author": {
@@ -17,17 +18,17 @@
     "build:prod": "yarn build:webpack",
     "build:serve": "serve -s dist/",
     "build:webpack": "cross-env NODE_ENV=production webpack --config node_modules/@bamdadsabbagh/webpack-config/webpack.prod.js",
+    "dev": "cross-env NODE_ENV=development webpack-dev-server --config node_modules/@bamdadsabbagh/webpack-config/webpack.dev.js",
     "lint": "eslint src --ext .js,.jsx,.ts,.tsx --fix",
     "package:clean": "rm -rf node_modules",
     "package:reinstall": "npm run package:clean && yarn",
     "package:sort": "npx sort-package-json",
-    "start": "cross-env NODE_ENV=development webpack-dev-server --config node_modules/@bamdadsabbagh/webpack-config/webpack.dev.js"
+    "start": "yarn dev"
   },
   "dependencies": {},
   "devDependencies": {
     "@bamdadsabbagh/eslint-config": "^1.4.27",
     "@bamdadsabbagh/stylelint-config": "^1.2.126",
     "@bamdadsabbagh/webpack-config": "^1.1.161"
-  },
-  "version": "1.0.1"
+  }
 }
