@@ -1,97 +1,59 @@
-import { config } from './config'
+import { config } from './config';
 
 export class Canvas {
+  constructor (container, window) {
+    this.container = container;
+    this.window = window;
+    const { width, height, opacity } = config.canvas;
+    this.width = width;
+    this.height = height;
+    this.opacity = opacity;
+    this.init ();
+    this.setListeners ();
+  }
 
-    constructor (container, window) {
+  init () {
+    this.setElement ();
+  }
 
-        this.container = container
+  resize () {
+    this.el.style.width = this.window.innerWidth + 'px';
+    this.el.style.height = this.window.innerHeight + 'px';
+  }
 
-        this.window = window
+  getContext () {
+    return this.el.getContext ('2d');
+  }
 
-        const { width, height, opacity } = config.canvas
+  getElement () {
+    return this.el;
+  }
 
-        this.width = width
+  getHeight () {
+    return this.el.height;
+  }
 
-        this.height = height
+  getWidth () {
+    return this.el.width;
+  }
 
-        this.opacity = opacity
+  setElement () {
+    this.el = document.createElement ('canvas');
+    this.el.width = this.width;
+    this.el.height = this.height;
+    this.resize ();
+    this.setOpacity ();
+    this.container.appendChild (this.el);
+  }
 
-        this.init ()
-    
-        this.setListeners ()
-    
-    }
+  setOpacity () {
+    const context = this.getContext ();
+    context.globalAlpha = this.opacity;
+  }
 
-    init () {
-
-        this.setElement ()
-
-    }
-
-    resize () {
-
-        this.el.style.width = this.window.innerWidth + 'px'
-
-        this.el.style.height = this.window.innerHeight + 'px'
-
-    }
-
-    getContext () {
-
-        return this.el.getContext ('2d')
-
-    }
-
-    getElement () {
-
-        return this.el
-    
-    }
-
-    getHeight () {
-
-        return this.el.height
-    
-    }
-
-    getWidth () {
-
-        return this.el.width
-    
-    }
-
-    setElement () {
-
-        this.el = document.createElement ('canvas')
-
-        this.el.width = this.width
-
-        this.el.height = this.height
-
-        this.resize ()
-
-        this.setOpacity ()
-
-        this.container.appendChild (this.el)
-
-    }
-
-    setOpacity () {
-
-        const context = this.getContext ()
-
-        context.globalAlpha = this.opacity
-    
-    }
-
-    setListeners () {
-
-        this.window.addEventListener ('resize', () => {
-
-            this.resize ()
-    
-        })
-        
-    }
-
+  setListeners () {
+    this.window.addEventListener ('resize', () => {
+      this.resize ();
+    });
+  }
 }

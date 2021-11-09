@@ -1,121 +1,78 @@
-import { config } from './config'
-import { getRandom } from './utils'
+import { config } from './config';
+import { getRandom } from './utils';
 
 export class SmokeParticle {
+  constructor (canvas) {
+    this.canvas = canvas;
+    this.sprite = config.sprite;
 
-    constructor (canvas) {
+    this.pos = {
+      'x': getRandom (0, this.canvas.getWidth ()),
+      'y': getRandom (0, this.canvas.getHeight ()),
+    };
 
-        this.canvas = canvas
+    const { velocity } = config.particle;
+    this.velocity = {
+      'x': getRandom (-velocity, velocity),
+      'y': getRandom (-velocity, velocity),
+    };
 
-        const { sprite } = config
+    this.radius = config.particle.radius;
+    this.showDot = config.particle.showDot;
+    this.init ();
+  }
 
-        this.sprite = sprite
+  init () {
+    const image = new Image ();
+    image.src = this.sprite;
+    this.image = image;
+  }
 
-        const { radius, velocity, showDot } = config.particle
+  draw () {
+    if (this.showDot) {
+      this.drawDot ();
+    }
+    this.drawSprite ();
+  }
 
-        this.pos = {
-            'x': getRandom (0, this.canvas.getWidth ()),
-            'y': getRandom (0, this.canvas.getHeight ()),
-        }
+  drawDot () {
+    const context = this.canvas.getContext ();
+    context.beginPath ();
+    context.arc (
+      this.pos.x,
+      this.pos.y,
+      this.radius,
+      0,
+      2 * Math.PI,
+      false,
+    );
+    context.fillStyle = 'rgba(0, 255, 255, 1)';
+    context.fill ();
+    context.closePath ();
+  }
 
-        this.velocity = {
-            'x': getRandom (-velocity, velocity),
-            'y': getRandom (-velocity, velocity),
-        }
+  drawSprite () {
+    const context = this.canvas.getContext ();
+    context.drawImage (this.image, this.pos.x - 128, this.pos.y - 128);
+  }
 
-        this.radius = radius
+  update () {
+    this.pos.x += this.velocity.x;
+    this.pos.y += this.velocity.y;
+    this.checkBorders ();
+  }
 
-        this.showDot = showDot
-
-        this.init ()
-
+  checkBorders () {
+    if (this.pos.x >= this.canvas.getWidth ()) {
+      this.velocity.x = -this.velocity.x;
+    } else if (this.pos.x <= 0) {
+      this.velocity.x = -this.velocity.x;
     }
 
-    init () {
-
-        const image = new Image ()
-
-        image.src = this.sprite
-
-        this.image = image
-    
+    if (this.pos.y >= this.canvas.getHeight ()) {
+      this.velocity.y = -this.velocity.y;
+    } else if (this.pos.y <= 0) {
+      this.velocity.y = -this.velocity.y;
     }
-
-    draw () {
-
-        if (this.showDot) {
-
-            this.drawDot ()
-        
-        }
-
-        this.drawSprite ()
-    
-    }
-
-    drawDot () {
-
-        const context = this.canvas.getContext ()
-
-        context.beginPath ()
-
-        context.arc (
-            this.pos.x,
-            this.pos.y,
-            this.radius,
-            0,
-            2 * Math.PI,
-            false,
-        )
-
-        context.fillStyle = 'rgba(0, 255, 255, 1)'
-
-        context.fill ()
-
-        context.closePath ()
-
-    }
-
-    drawSprite () {
-
-        const context = this.canvas.getContext ()
-            
-        context.drawImage (this.image, this.pos.x - 128, this.pos.y - 128)
-        
-    }
-
-    update () {
-
-        this.pos.x += this.velocity.x
-
-        this.pos.y += this.velocity.y
-
-        this.checkBorders ()
-
-    }
-
-    checkBorders () {
-
-        if (this.pos.x >= this.canvas.getWidth ()) {
-    
-            this.velocity.x = -this.velocity.x
-        
-        } else if (this.pos.x <= 0) {
-
-            this.velocity.x = -this.velocity.x
-
-        }
-
-        if (this.pos.y >= this.canvas.getHeight ()) {
-
-            this.velocity.y = -this.velocity.y
-            
-        } else if (this.pos.y <= 0) {
-
-            this.velocity.y = -this.velocity.y
-            
-        }
-
-    }
-
+  }
 }
