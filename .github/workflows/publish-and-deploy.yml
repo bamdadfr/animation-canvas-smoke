@@ -28,6 +28,12 @@ jobs:
             @semantic-release/npm \
             @qiwi/semantic-release-gh-pages-plugin
 
+      - name: Install dependencies
+        run: yarn
+
+      - name: Build
+        run: yarn build
+
       - name: Publish
         run: semantic-release
         env:

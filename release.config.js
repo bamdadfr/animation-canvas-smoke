@@ -11,7 +11,7 @@ module.exports = {
       }],
       '@semantic-release/github',
       ['@qiwi/semantic-release-gh-pages-plugin', {
-        'src': 'dist',
+        src: 'dist',
       }],
       ['@semantic-release/git', {
         'assets': [
