@@ -7,9 +7,12 @@ module.exports = {
         'changelogFile': 'CHANGELOG.md',
       }],
       ['@semantic-release/npm', {
-        'npmPublish': false,
+        npmPublish: false,
       }],
       '@semantic-release/github',
+      ['@qiwi/semantic-release-gh-pages-plugin', {
+        src: './dist',
+      }],
       ['@semantic-release/git', {
         'assets': [
           'CHANGELOG.md',
