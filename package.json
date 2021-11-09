@@ -13,22 +13,23 @@
     "url": "https://bamdadsabbagh.com"
   },
   "scripts": {
-    "build": "yarn build:clean && yarn build:prod && yarn build:serve",
-    "build:clean": "rm -rf dist/",
-    "build:prod": "yarn build:webpack",
+    "build": "yarn build:clean && yarn build:run",
+    "build:clean": "rimraf dist/",
+    "build:run": "yarn vite build",
     "build:serve": "serve -s dist/",
-    "build:webpack": "cross-env NODE_ENV=production webpack --config node_modules/@bamdadsabbagh/webpack-config/webpack.prod.js",
-    "dev": "cross-env NODE_ENV=development webpack-dev-server --config node_modules/@bamdadsabbagh/webpack-config/webpack.dev.js",
+    "dev": "vite",
     "lint": "eslint src --ext .js,.jsx,.ts,.tsx --fix",
-    "package:clean": "rm -rf node_modules",
+    "package:clean": "rimraf node_modules",
     "package:reinstall": "npm run package:clean && yarn",
-    "package:sort": "npx sort-package-json",
-    "start": "yarn dev"
+    "package:sort": "npx sort-package-json"
   },
   "dependencies": {},
   "devDependencies": {
-    "@bamdadsabbagh/eslint-config": "^1.4.27",
-    "@bamdadsabbagh/stylelint-config": "^1.2.126",
-    "@bamdadsabbagh/webpack-config": "^1.1.161"
+    "@bamdadsabbagh/eslint-config": "^1.17.2",
+    "@parcel/transformer-sass": "^2.0.1",
+    "rimraf": "^3.0.2",
+    "sass": "^1.43.4",
+    "sass-reset": "^1.0.4",
+    "vite": "^2.6.13"
   }
 }
