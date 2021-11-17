@@ -1,44 +1,44 @@
-import { config } from './config';
-import { getRandom } from './utils';
+import {config} from './config';
+import {getRandom} from './utils';
 
 export class SmokeParticle {
-  constructor (canvas) {
+  constructor(canvas) {
     this.canvas = canvas;
     this.sprite = config.sprite;
 
     this.pos = {
-      'x': getRandom (0, this.canvas.getWidth ()),
-      'y': getRandom (0, this.canvas.getHeight ()),
+      x: getRandom(0, this.canvas.getWidth()),
+      y: getRandom(0, this.canvas.getHeight()),
     };
 
-    const { velocity } = config.particle;
+    const {velocity} = config.particle;
     this.velocity = {
-      'x': getRandom (-velocity, velocity),
-      'y': getRandom (-velocity, velocity),
+      x: getRandom(-velocity, velocity),
+      y: getRandom(-velocity, velocity),
     };
 
     this.radius = config.particle.radius;
     this.showDot = config.particle.showDot;
-    this.init ();
+    this.init();
   }
 
-  init () {
-    const image = new Image ();
+  init() {
+    const image = new Image();
     image.src = this.sprite;
     this.image = image;
   }
 
-  draw () {
+  draw() {
     if (this.showDot) {
-      this.drawDot ();
+      this.drawDot();
     }
-    this.drawSprite ();
+    this.drawSprite();
   }
 
-  drawDot () {
-    const context = this.canvas.getContext ();
-    context.beginPath ();
-    context.arc (
+  drawDot() {
+    const context = this.canvas.getContext();
+    context.beginPath();
+    context.arc(
       this.pos.x,
       this.pos.y,
       this.radius,
@@ -47,29 +47,29 @@ export class SmokeParticle {
       false,
     );
     context.fillStyle = 'rgba(0, 255, 255, 1)';
-    context.fill ();
-    context.closePath ();
+    context.fill();
+    context.closePath();
   }
 
-  drawSprite () {
-    const context = this.canvas.getContext ();
-    context.drawImage (this.image, this.pos.x - 128, this.pos.y - 128);
+  drawSprite() {
+    const context = this.canvas.getContext();
+    context.drawImage(this.image, this.pos.x - 128, this.pos.y - 128);
   }
 
-  update () {
+  update() {
     this.pos.x += this.velocity.x;
     this.pos.y += this.velocity.y;
-    this.checkBorders ();
+    this.checkBorders();
   }
 
-  checkBorders () {
-    if (this.pos.x >= this.canvas.getWidth ()) {
+  checkBorders() {
+    if (this.pos.x >= this.canvas.getWidth()) {
       this.velocity.x = -this.velocity.x;
     } else if (this.pos.x <= 0) {
       this.velocity.x = -this.velocity.x;
     }
 
-    if (this.pos.y >= this.canvas.getHeight ()) {
+    if (this.pos.y >= this.canvas.getHeight()) {
       this.velocity.y = -this.velocity.y;
     } else if (this.pos.y <= 0) {
       this.velocity.y = -this.velocity.y;

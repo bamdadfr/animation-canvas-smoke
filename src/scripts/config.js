@@ -18,5 +18,5 @@ export const config = {
     radius: 5,
     velocity: 0.2,
   },
-  getContainer: () => document.getElementById ('canvas-smoke-animation'),
+  getContainer: () => document.getElementById('canvas-smoke-animation'),
 };
